@@ -9,6 +9,7 @@ import StudyTimer from '@/components/StudyTimer'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'tasks' | 'timer'>('dashboard')
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
   
   // Mock user for Guest Mode
   const user = {
@@ -18,13 +19,30 @@ export default function Home() {
     email: 'guest@neurocore.io'
   } as any
 
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark'
+    setTheme(newTheme)
+    if (newTheme === 'light') {
+      document.documentElement.classList.add('light')
+    } else {
+      document.documentElement.classList.remove('light')
+    }
+  }
+
   const handleLogout = () => {
     console.log("Guest Mode: Logout disabled")
   }
 
   return (
-    <div className="flex min-h-screen bg-[#050508] text-white font-sans selection:bg-cyan-500 selection:text-white">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={handleLogout} user={user} />
+    <div className={`flex min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'bg-[#050508] text-white' : 'bg-[#f8fafc] text-[#0f172a]'} font-sans selection:bg-cyan-500 selection:text-white`}>
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        onLogout={handleLogout} 
+        user={user} 
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
       
       <main className="flex-1 overflow-y-auto p-8 md:ml-[240px]">
         <AnimatePresence mode="wait">
@@ -36,9 +54,9 @@ export default function Home() {
             transition={{ duration: 0.3 }}
             className="max-w-6xl mx-auto"
           >
-            {activeTab === 'dashboard' && <Dashboard user={user} />}
-            {activeTab === 'tasks' && <TaskBoard user={user} />}
-            {activeTab === 'timer' && <StudyTimer user={user} />}
+            {activeTab === 'dashboard' && <Dashboard user={user} theme={theme} />}
+            {activeTab === 'tasks' && <TaskBoard user={user} theme={theme} />}
+            {activeTab === 'timer' && <StudyTimer user={user} theme={theme} />}
           </motion.div>
         </AnimatePresence>
       </main>

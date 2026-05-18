@@ -8,26 +8,66 @@
   --color-cyber-deep: #050508;
   --color-card-bg: #0f0f1e;
   --color-card-border: #1e293b;
+
+  /* Light Theme Colors */
+  --color-light-bg: #f8fafc;
+  --color-light-card: #ffffff;
+  --color-light-border: #e2e8f0;
+  --color-light-text: #0f172a;
+  --color-light-accent: #3b82f6;
 }
 
 :root {
   --background: #050508;
   --foreground: #f8fafc;
+  --transition-speed: 0.3s;
+}
+
+:root.light {
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .sleek-glass {
   background: rgba(15, 15, 30, 0.6);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(30, 41, 59, 0.5);
+  transition: all var(--transition-speed);
+}
+
+.light .sleek-glass {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
 }
 
 .btn-gradient {
   background: linear-gradient(to right, #0891b2, #4f46e5);
   box-shadow: 0 5px 15px rgba(8, 145, 178, 0.3);
+}
+
+/* Theme-aware card background */
+.theme-card {
+  background-color: #0f0f1e;
+  border-color: #1e293b;
+}
+
+.light .theme-card {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+}
+
+.theme-text-muted {
+  color: #94a3b8;
+}
+
+.light .theme-text-muted {
+  color: #64748b;
 }
