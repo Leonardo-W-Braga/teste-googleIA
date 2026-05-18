@@ -1,0 +1,6 @@
+{
+  "name": "NeuroCore",
+  "description": "Sistema de gestão de rotina de estudos com interface sleek, analytics avançado e foco profundo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
